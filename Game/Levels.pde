@@ -5,7 +5,7 @@ class Levels {
     fill(0);
     textSize(40);
     textAlign(CENTER, CENTER);
-
+    
     text("Level 1", 400, 100);
     text("Level 2 (Locked)", 400, 300);
     text("Level 3 (Locked)", 400, 500);
@@ -13,7 +13,7 @@ class Levels {
 
   void level_1() {
     background(255);
-
+    
     fill(0);
     textSize(40);
     textAlign(CENTER, CENTER);

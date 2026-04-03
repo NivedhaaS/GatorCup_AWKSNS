@@ -1,32 +1,39 @@
+
+
 Menu menu;
 Levels levels;
 Timer timer;
+
+
 
 int different_screens = 0; //tracks which screen the game is currently on
 boolean show_menu = true;
 int goals_scored = 0;
 int goal_target = 10;
 
+
 void setup() {
   size(800, 600);
+  pixelDensity(1);
   menu = new Menu();
   levels = new Levels();
   timer = new Timer(60);
 }
 
 void draw() {
-  background(200);
-
   if (different_screens == 0) {
+  
+    menu.drawBackground();
     menu.startButton();
   } 
   else if (different_screens == 1) {
+    background(200);
     levels.all_levels();
   } 
   else if (different_screens == 2) {
+    background(200);
     levels.level_1();
     timer.display();
-
     fill(0);
     textSize(24);
     textAlign(CENTER, CENTER);
