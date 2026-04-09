@@ -62,13 +62,13 @@ class Menu {
     text("You only have one minute per level to complete this task.", 150, 380);
     text("The levels will continue to get harder and harder.", 150, 425);
     text("Once you complete Level 3, you will officially be the winner.", 150, 460);
-
+    text("Good luck and have fun!", 150, 490);
     fill(0, 150, 255);
-    rect(300, 480, 200, 60, 12);
+    rect(300, 520, 200, 60, 12);
 
     fill(255);
     textAlign(CENTER, CENTER);
     textSize(24);
-    text("Back", 400, 510);
+    text("Back", 400, 550);
   }
 }

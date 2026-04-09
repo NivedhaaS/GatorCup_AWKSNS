@@ -75,7 +75,7 @@ void mousePressed() {
     }
   } 
   else if (different_screens == 3) {
-    if (mouseX > 300 && mouseX < 500 && mouseY > 480 && mouseY < 540) {
+    if (mouseX > 300 && mouseX < 500 && mouseY > 520 && mouseY < 580) {
       different_screens = 0;
     }
   }
