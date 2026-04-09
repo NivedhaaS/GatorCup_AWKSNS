@@ -1,53 +1,88 @@
-//Ball starts at the player position. Dragging sets direction and releasing launches it opposite to the drag.
 class Ball {
   float x, y;
+  float startX, startY;
   float vx, vy;
+  float radius;
+
   boolean dragging;
+  boolean moving;
+
+  PImage soccerImg;
 
   Ball(float x, float y) {
     this.x = x;
     this.y = y;
+    this.startX = x;
+    this.startY = y;
+
     vx = 0;
     vy = 0;
+
+    radius = 30;
     dragging = false;
+    moving = false;
+
+    soccerImg = loadImage("soccerBall.png");
   }
 
   void display() {
-    fill(255);
-    ellipse(x, y, 20, 20);
+    imageMode(CENTER);
+    image(soccerImg, x, y, radius * 2, radius * 2);
   }
 
-  //updates ball position after release
-  void move() {
-    if (!dragging) {
+  void update() {
+    if (moving && !dragging) {
       x += vx;
       y += vy;
+
+      vx *= 0.98;
+      vy *= 0.98;
+
+      if (abs(vx) < 0.15 && abs(vy) < 0.15) {
+        vx = 0;
+        vy = 0;
+        moving = false;
+      }
     }
+  }
+
+  boolean isMouseOverBall() {
+    return dist(mouseX, mouseY, x, y) <= radius;
   }
 
   void startDrag() {
-    dragging = true;
-  }
-
-  //ball follows mouse during drag
-  void drag() {
-    if (dragging) {
-      x = mouseX;
-      y = mouseY;
+    if (!moving) {
+      dragging = true;
     }
   }
 
-  void release(float startX, float startY) {
-    dragging = false;
-    vx = (startX - x) * 0.2;
-    vy = (startY - y) * 0.2;
+  void showAimLine() {
+    if (dragging) {
+      stroke(255, 0, 0);
+      strokeWeight(4);
+      line(x, y, mouseX, mouseY);
+
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(mouseX, mouseY, 12, 12);
+    }
   }
 
-  //reset ball to start position
-  void reset(float startX, float startY) {
+  void release() {
+    if (dragging) {
+      dragging = false;
+      vx = (x - mouseX) * 0.18;
+      vy = (y - mouseY) * 0.18;
+      moving = true;
+    }
+  }
+
+  void reset() {
     x = startX;
     y = startY;
     vx = 0;
     vy = 0;
+    dragging = false;
+    moving = false;
   }
 }

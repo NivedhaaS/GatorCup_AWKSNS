@@ -2,7 +2,7 @@ Menu menu;
 Levels levels;
 Timer timer;
 
-int different_screens = 0; //tracks which screen the game is currently on
+int different_screens = 0;
 boolean show_menu = true;
 int goals_scored = 0;
 int goal_target = 10;
@@ -22,11 +22,9 @@ void draw() {
     menu.howToPlayButton();
   } 
   else if (different_screens == 1) {
-    background(200);
     levels.all_levels();
   } 
   else if (different_screens == 2) {
-    background(200);
     levels.level_1();
     timer.display();
 
@@ -51,6 +49,7 @@ void mousePressed() {
     if (mouseX > 300 && mouseX < 500 && mouseY > 250 && mouseY < 330) {
       different_screens = 1;
     }
+
     if (mouseX > 300 && mouseX < 500 && mouseY > 350 && mouseY < 430) {
       different_screens = 3;
     }
@@ -60,23 +59,39 @@ void mousePressed() {
       different_screens = 2;
       timer.reset_timer();
       goals_scored = 0;
+      levels.resetLevel1();
     }
   } 
   else if (different_screens == 2) {
+
+    // restart level
     if (mouseX > 50 && mouseX < 250 && mouseY > 520 && mouseY < 570) {
       timer.reset_timer();
       goals_scored = 0;
+      levels.resetLevel1();
+      return;
     }
 
+    // restart game
     if (mouseX > 550 && mouseX < 750 && mouseY > 520 && mouseY < 570) {
       different_screens = 0;
       goals_scored = 0;
       timer.stop_timer();
+      levels.resetLevel1();
+      return;
     }
+
+    levels.startLevel1Drag();
   } 
   else if (different_screens == 3) {
     if (mouseX > 300 && mouseX < 500 && mouseY > 520 && mouseY < 580) {
       different_screens = 0;
     }
+  }
+}
+
+void mouseReleased() {
+  if (different_screens == 2) {
+    levels.releaseLevel1Drag();
   }
 }
