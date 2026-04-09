@@ -6,12 +6,17 @@ class Menu {
   }
 
   void drawBackground() {
+    background(0);
+    imageMode(CORNER);
     image(bg, 0, 0, width, height);
+    rectMode(CORNER);
   }
 
   void startButton() {
+    rectMode(CORNER);
+    noStroke();
     fill(0, 150, 255);
-    rect(300, 250, 200, 80);
+    rect(300, 250, 200, 80, 12);
 
     textSize(100);
     textAlign(CENTER, CENTER);
@@ -26,8 +31,10 @@ class Menu {
   }
 
   void howToPlayButton() {
+    rectMode(CORNER);
+    noStroke();
     fill(0, 150, 255);
-    rect(300, 350, 200, 80);
+    rect(300, 350, 200, 80, 12);
 
     fill(255);
     textAlign(CENTER, CENTER);
@@ -36,8 +43,12 @@ class Menu {
   }
 
   void instructionsPage() {
+    background(0);
+    imageMode(CORNER);
     image(bg, 0, 0, width, height);
+    rectMode(CORNER);
 
+    noStroke();
     fill(255, 255, 255, 210);
     rect(100, 60, 600, 450, 20);
 
@@ -53,7 +64,6 @@ class Menu {
     textAlign(LEFT, TOP);
     textSize(22);
     fill(40);
-
     text("Hello!", 150, 180);
     text("This is a soccer game called GatorCup.", 150, 220);
     text("You must score goals to win.", 150, 255);
@@ -63,6 +73,7 @@ class Menu {
     text("The levels will continue to get harder and harder.", 150, 425);
     text("Once you complete Level 3, you will officially be the winner.", 150, 460);
     text("Good luck and have fun!", 150, 490);
+
     fill(0, 150, 255);
     rect(300, 520, 200, 60, 12);
 

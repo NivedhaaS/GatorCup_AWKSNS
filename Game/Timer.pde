@@ -1,4 +1,4 @@
-//Timer keeps track of how much time is left in each level -> fully implemented class
+// Timer keeps track of how much time is left in each level
 class Timer {
   int start_time;
   int level_time;
@@ -6,6 +6,7 @@ class Timer {
 
   Timer(int seconds) {
     level_time = seconds;
+    start_time = 0;
     is_running = false;
   }
 
@@ -15,8 +16,7 @@ class Timer {
   }
 
   void reset_timer() {
-    start_time = millis();
-    is_running = true;
+    start_timer();
   }
 
   void stop_timer() {
@@ -38,7 +38,7 @@ class Timer {
   }
 
   boolean is_finished() {
-    return time_left() == 0;
+    return is_running && time_left() <= 0;
   }
 
   void display() {

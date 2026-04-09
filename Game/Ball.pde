@@ -28,6 +28,7 @@ class Ball {
   void display() {
     imageMode(CENTER);
     image(soccerImg, x, y, radius * 2, radius * 2);
+    imageMode(CORNER);
   }
 
   void update() {

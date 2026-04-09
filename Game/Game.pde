@@ -7,9 +7,14 @@ boolean show_menu = true;
 int goals_scored = 0;
 int goal_target = 10;
 
+boolean level2Unlocked = false;
+boolean level3Unlocked = false;
+
 void setup() {
   size(800, 600);
   pixelDensity(1);
+  rectMode(CORNER);
+
   menu = new Menu();
   levels = new Levels();
   timer = new Timer(60);
@@ -33,6 +38,11 @@ void draw() {
     textAlign(CENTER, CENTER);
     text("Goals: " + goals_scored + "/" + goal_target, 120, 40);
 
+    if (goals_scored >= goal_target && !timer.is_finished()) {
+      timer.stop_timer();
+      different_screens = 4;
+    }
+
     if (timer.is_finished()) {
       fill(255, 0, 0);
       textSize(32);
@@ -42,56 +52,224 @@ void draw() {
   else if (different_screens == 3) {
     menu.instructionsPage();
   }
+  else if (different_screens == 4) {
+    levels.winScreen(1);
+  }
+  else if (different_screens == 5) {
+    levels.level_2();
+    timer.display();
+
+    fill(0);
+    textSize(24);
+    textAlign(CENTER, CENTER);
+    text("Goals: " + goals_scored + "/" + goal_target, 120, 40);
+
+    if (goals_scored >= goal_target && !timer.is_finished()) {
+      timer.stop_timer();
+      different_screens = 6;
+    }
+
+    if (timer.is_finished()) {
+      fill(255, 0, 0);
+      textSize(32);
+      text("Time's Up!", 400, 300);
+    }
+  }
+  else if (different_screens == 6) {
+    levels.winScreen(2);
+  }
+  else if (different_screens == 7) {
+    levels.level_3();
+    timer.display();
+
+    fill(0);
+    textSize(24);
+    textAlign(CENTER, CENTER);
+    text("Goals: " + goals_scored + "/" + goal_target, 120, 40);
+
+    if (goals_scored >= goal_target && !timer.is_finished()) {
+      timer.stop_timer();
+      different_screens = 8;
+    }
+
+    if (timer.is_finished()) {
+      fill(255, 0, 0);
+      textSize(32);
+      text("Time's Up!", 400, 300);
+    }
+  }
+  else if (different_screens == 8) {
+    levels.champScreen();
+  }
 }
 
 void mousePressed() {
   if (different_screens == 0) {
+    // Start button
     if (mouseX > 300 && mouseX < 500 && mouseY > 250 && mouseY < 330) {
       different_screens = 1;
+      return;
     }
 
+    // Instructions button
     if (mouseX > 300 && mouseX < 500 && mouseY > 350 && mouseY < 430) {
       different_screens = 3;
+      return;
     }
   } 
   else if (different_screens == 1) {
-    if (mouseX > 300 && mouseX < 500 && mouseY > 70 && mouseY < 130) {
+    // Level 1 button
+    if (mouseX > 250 && mouseX < 550 && mouseY > 140 && mouseY < 240) {
       different_screens = 2;
-      timer.reset_timer();
       goals_scored = 0;
+      timer.reset_timer();
       levels.resetLevel1();
+      return;
+    }
+
+    // Level 2 button
+    if (mouseX > 250 && mouseX < 550 && mouseY > 270 && mouseY < 370 && level2Unlocked) {
+      different_screens = 5;
+      goals_scored = 0;
+      timer.reset_timer();
+      levels.resetLevel2();
+      return;
+    }
+
+    // Level 3 button
+    if (mouseX > 250 && mouseX < 550 && mouseY > 400 && mouseY < 500 && level3Unlocked) {
+      different_screens = 7;
+      goals_scored = 0;
+      timer.reset_timer();
+      levels.resetLevel3();
+      return;
     }
   } 
   else if (different_screens == 2) {
-
-    // restart level
+    // Restart level
     if (mouseX > 50 && mouseX < 250 && mouseY > 520 && mouseY < 570) {
-      timer.reset_timer();
       goals_scored = 0;
       levels.resetLevel1();
+      timer.reset_timer();
       return;
     }
 
-    // restart game
+    // Restart game
     if (mouseX > 550 && mouseX < 750 && mouseY > 520 && mouseY < 570) {
       different_screens = 0;
       goals_scored = 0;
-      timer.stop_timer();
       levels.resetLevel1();
+      timer.stop_timer();
       return;
     }
 
-    levels.startLevel1Drag();
+    if (!timer.is_finished()) {
+      levels.startLevel1Drag();
+    }
   } 
   else if (different_screens == 3) {
     if (mouseX > 300 && mouseX < 500 && mouseY > 520 && mouseY < 580) {
       different_screens = 0;
+      return;
+    }
+  }
+  else if (different_screens == 4) {
+    if (mouseX > 300 && mouseX < 500 && mouseY > 340 && mouseY < 410) {
+      level2Unlocked = true;
+      goals_scored = 0;
+      levels.resetLevel1();
+      timer.stop_timer();
+      different_screens = 1;
+      return;
+    }
+
+    // Main menu button
+    if (mouseX > 300 && mouseX < 500 && mouseY > 430 && mouseY < 500) {
+      different_screens = 0;
+      goals_scored = 0;
+      levels.resetLevel1();
+      timer.stop_timer();
+      return;
+    }
+  }
+  else if (different_screens == 5) {
+    if (mouseX > 50 && mouseX < 250 && mouseY > 520 && mouseY < 570) {
+      goals_scored = 0;
+      levels.resetLevel2();
+      timer.reset_timer();
+      return;
+    }
+
+    if (mouseX > 550 && mouseX < 750 && mouseY > 520 && mouseY < 570) {
+      different_screens = 0;
+      goals_scored = 0;
+      levels.resetLevel2();
+      timer.stop_timer();
+      return;
+    }
+
+    if (!timer.is_finished()) {
+      levels.startLevel2Drag();
+    }
+  }
+  else if (different_screens == 6) {
+    if (mouseX > 300 && mouseX < 500 && mouseY > 340 && mouseY < 410) {
+      level3Unlocked = true;
+      goals_scored = 0;
+      levels.resetLevel2();
+      timer.stop_timer();
+      different_screens = 1;
+      return;
+    }
+
+    if (mouseX > 300 && mouseX < 500 && mouseY > 430 && mouseY < 500) {
+      different_screens = 0;
+      goals_scored = 0;
+      levels.resetLevel2();
+      timer.stop_timer();
+      return;
+    }
+  }
+  else if (different_screens == 7) {
+    if (mouseX > 50 && mouseX < 250 && mouseY > 520 && mouseY < 570) {
+      goals_scored = 0;
+      levels.resetLevel3();
+      timer.reset_timer();
+      return;
+    }
+
+    if (mouseX > 550 && mouseX < 750 && mouseY > 520 && mouseY < 570) {
+      different_screens = 0;
+      goals_scored = 0;
+      levels.resetLevel3();
+      timer.stop_timer();
+      return;
+    }
+
+    if (!timer.is_finished()) {
+      levels.startLevel3Drag();
+    }
+  }
+  else if (different_screens == 8) {
+    // Champ page
+    if (mouseX > 300 && mouseX < 500 && mouseY > 400 && mouseY < 470) {
+      different_screens = 0;
+      goals_scored = 0;
+      levels.resetLevel3();
+      timer.stop_timer();
+      return;
     }
   }
 }
 
 void mouseReleased() {
-  if (different_screens == 2) {
+  if (different_screens == 2 && !timer.is_finished()) {
     levels.releaseLevel1Drag();
+  }
+  else if (different_screens == 5 && !timer.is_finished()) {
+    levels.releaseLevel2Drag();
+  }
+  else if (different_screens == 7 && !timer.is_finished()) {
+    levels.releaseLevel3Drag();
   }
 }
