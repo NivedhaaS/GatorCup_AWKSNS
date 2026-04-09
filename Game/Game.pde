@@ -19,6 +19,7 @@ void draw() {
   if (different_screens == 0) {
     menu.drawBackground();
     menu.startButton();
+    menu.howToPlayButton();
   } 
   else if (different_screens == 1) {
     background(200);
@@ -28,6 +29,7 @@ void draw() {
     background(200);
     levels.level_1();
     timer.display();
+
     fill(0);
     textSize(24);
     textAlign(CENTER, CENTER);
@@ -38,6 +40,9 @@ void draw() {
       textSize(32);
       text("Time's Up!", 400, 300);
     }
+  } 
+  else if (different_screens == 3) {
+    menu.instructionsPage();
   }
 }
 
@@ -45,6 +50,9 @@ void mousePressed() {
   if (different_screens == 0) {
     if (mouseX > 300 && mouseX < 500 && mouseY > 250 && mouseY < 330) {
       different_screens = 1;
+    }
+    if (mouseX > 300 && mouseX < 500 && mouseY > 350 && mouseY < 430) {
+      different_screens = 3;
     }
   } 
   else if (different_screens == 1) {
@@ -64,6 +72,11 @@ void mousePressed() {
       different_screens = 0;
       goals_scored = 0;
       timer.stop_timer();
+    }
+  } 
+  else if (different_screens == 3) {
+    if (mouseX > 300 && mouseX < 500 && mouseY > 480 && mouseY < 540) {
+      different_screens = 0;
     }
   }
 }
