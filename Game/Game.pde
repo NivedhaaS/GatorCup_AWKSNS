@@ -263,7 +263,7 @@ void mousePressed() {
       levels.resetLevel2();
       levels.resetLevel3();
 
-      timer.stop_timer();
+      timer.reset_timer();
       return;
     }
   }
