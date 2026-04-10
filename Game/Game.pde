@@ -252,10 +252,17 @@ void mousePressed() {
   }
   else if (different_screens == 8) {
     // Champ page
-    if (mouseX > 300 && mouseX < 500 && mouseY > 400 && mouseY < 470) {
+    if (mouseX > 300 && mouseX < 500 && mouseY > 470 && mouseY < 540) {
       different_screens = 0;
       goals_scored = 0;
+
+      level2Unlocked = false;
+      level3Unlocked = false;
+
+      levels.resetLevel1();
+      levels.resetLevel2();
       levels.resetLevel3();
+
       timer.stop_timer();
       return;
     }
