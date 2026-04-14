@@ -9,12 +9,24 @@ class Levels {
   float goalY = 220;
   float goalW = 70;
   float goalH = 160;
+  
+  float goal_speed = 4;
+  int goal_moving = 1;
 
   boolean level1GoalScored = false;
   boolean level2GoalScored = false;
   boolean level3GoalScored = false;
 
   int goalMessageStartTime = 0;
+  
+  
+  void GoalMoving() {
+    goalY += goal_speed * goal_moving;
+    if (goalY <= 80 || goalY + goalH >= 490) {
+      goal_moving *= -1;
+  }
+ }
+
 
   Levels() {
     level1Ball = new Ball(140, 300);
@@ -93,6 +105,7 @@ class Levels {
   }
 
   void level_2() {
+    GoalMoving();
     background(70, 180, 90);
     drawField();
     drawGoal();
@@ -219,6 +232,7 @@ class Levels {
       level2GoalScored = true;
       goalMessageStartTime = millis();
       level2Ball.reset();
+      goal_speed = random(2, 8);
     }
   }
 
