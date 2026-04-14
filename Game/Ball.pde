@@ -9,6 +9,7 @@ class Ball {
 
   PImage soccerImg;
 
+  //ball constructor it sets initial position and loads ball image
   Ball(float x, float y) {
     this.x = x;
     this.y = y;
@@ -25,12 +26,14 @@ class Ball {
     soccerImg = loadImage("soccerBall.png");
   }
 
+  //draws the ball on screen
   void display() {
     imageMode(CENTER);
     image(soccerImg, x, y, radius * 2, radius * 2);
     imageMode(CORNER);
   }
 
+  //updates ball movement and slows it down over time
   void update() {
     if (moving && !dragging) {
       x += vx;
@@ -47,16 +50,19 @@ class Ball {
     }
   }
 
+  //checks whether mouse is on the ball
   boolean isMouseOverBall() {
     return dist(mouseX, mouseY, x, y) <= radius;
   }
 
+  //starts dragging the ball
   void startDrag() {
     if (!moving) {
       dragging = true;
     }
   }
 
+  //draws aim line while dragging the ball
   void showAimLine() {
     if (dragging) {
       stroke(255, 0, 0);
@@ -69,6 +75,7 @@ class Ball {
     }
   }
 
+  //releases ball and sets velocity during release
   void release() {
     if (dragging) {
       dragging = false;
@@ -78,6 +85,7 @@ class Ball {
     }
   }
 
+  //resets ball to starting position
   void reset() {
     x = startX;
     y = startY;
