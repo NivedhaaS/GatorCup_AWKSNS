@@ -1,10 +1,12 @@
 class Menu {
   PImage bg;
 
+  // menu constructor it loads the background image
   Menu() {
     bg = loadImage("stadiumbg.png");
   }
 
+  // draws the menu background
   void drawBackground() {
     background(0);
     imageMode(CORNER);
@@ -12,6 +14,7 @@ class Menu {
     rectMode(CORNER);
   }
 
+  // draws the start button on the menu screen
   void startButton() {
     rectMode(CORNER);
     noStroke();
@@ -30,6 +33,7 @@ class Menu {
     text("START", 400, 290);
   }
 
+  // draws the instructions button on the menu screen
   void howToPlayButton() {
     rectMode(CORNER);
     noStroke();
@@ -42,6 +46,7 @@ class Menu {
     text("Instructions", 400, 390);
   }
 
+  // draws the instructions page with the game instructions 
   void instructionsPage() {
     background(0);
     imageMode(CORNER);

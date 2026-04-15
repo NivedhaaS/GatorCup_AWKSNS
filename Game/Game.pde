@@ -10,6 +10,7 @@ int goal_target = 10;
 boolean level2Unlocked = false;
 boolean level3Unlocked = false;
 
+// sets up the game window and initializes objects
 void setup() {
   size(800, 600);
   pixelDensity(1);
@@ -20,6 +21,7 @@ void setup() {
   timer = new Timer(60);
 }
 
+// display different screens and game levels
 void draw() {
   if (different_screens == 0) {
     menu.drawBackground();
@@ -103,22 +105,20 @@ void draw() {
   }
 }
 
+// handles all mouse clicks for menus and gameplay
 void mousePressed() {
   if (different_screens == 0) {
-    // Start button
     if (mouseX > 300 && mouseX < 500 && mouseY > 250 && mouseY < 330) {
       different_screens = 1;
       return;
     }
 
-    // Instructions button
     if (mouseX > 300 && mouseX < 500 && mouseY > 350 && mouseY < 430) {
       different_screens = 3;
       return;
     }
   } 
   else if (different_screens == 1) {
-    // Level 1 button
     if (mouseX > 250 && mouseX < 550 && mouseY > 140 && mouseY < 240) {
       different_screens = 2;
       goals_scored = 0;
@@ -127,7 +127,6 @@ void mousePressed() {
       return;
     }
 
-    // Level 2 button
     if (mouseX > 250 && mouseX < 550 && mouseY > 270 && mouseY < 370 && level2Unlocked) {
       different_screens = 5;
       goals_scored = 0;
@@ -136,7 +135,6 @@ void mousePressed() {
       return;
     }
 
-    // Level 3 button
     if (mouseX > 250 && mouseX < 550 && mouseY > 400 && mouseY < 500 && level3Unlocked) {
       different_screens = 7;
       goals_scored = 0;
@@ -146,7 +144,6 @@ void mousePressed() {
     }
   } 
   else if (different_screens == 2) {
-    // Restart level
     if (mouseX > 50 && mouseX < 250 && mouseY > 520 && mouseY < 570) {
       goals_scored = 0;
       levels.resetLevel1();
@@ -154,7 +151,6 @@ void mousePressed() {
       return;
     }
 
-    // Restart game
     if (mouseX > 550 && mouseX < 750 && mouseY > 520 && mouseY < 570) {
       different_screens = 0;
       goals_scored = 0;
@@ -183,7 +179,6 @@ void mousePressed() {
       return;
     }
 
-    // Main menu button
     if (mouseX > 300 && mouseX < 500 && mouseY > 430 && mouseY < 500) {
       different_screens = 0;
       goals_scored = 0;
@@ -251,7 +246,6 @@ void mousePressed() {
     }
   }
   else if (different_screens == 8) {
-    // Champ page
     if (mouseX > 300 && mouseX < 500 && mouseY > 470 && mouseY < 540) {
       different_screens = 0;
       goals_scored = 0;
@@ -269,6 +263,7 @@ void mousePressed() {
   }
 }
 
+// handles releasing the drag action for each level
 void mouseReleased() {
   if (different_screens == 2 && !timer.is_finished()) {
     levels.releaseLevel1Drag();

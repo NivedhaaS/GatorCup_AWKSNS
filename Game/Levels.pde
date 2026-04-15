@@ -19,7 +19,7 @@ class Levels {
 
   int goalMessageStartTime = 0;
   
-  
+  // moves the goal up and down in level 2 and 3
   void GoalMoving() {
     goalY += goal_speed * goal_moving;
     if (goalY <= 80 || goalY + goalH >= 490) {
@@ -27,7 +27,7 @@ class Levels {
   }
  }
 
-
+ // constructor initializes the balls for each level and loads the trophy image
   Levels() {
     level1Ball = new Ball(140, 300);
     level2Ball = new Ball(140, 300);
@@ -73,6 +73,7 @@ class Levels {
     text("Level 3", 400, 450);
   }
 
+  // draws the first level with the ball, goal, and field
   void level_1() {
     background(70, 180, 90);
     drawField();
@@ -104,6 +105,7 @@ class Levels {
     }
   }
 
+  // draws the second level with a moving goal and checks for goals 
   void level_2() {
     GoalMoving();
     background(70, 180, 90);
@@ -136,6 +138,7 @@ class Levels {
     }
   }
 
+  // draws the third level with a moving goal and checks for goals
   void level_3() {
     background(70, 180, 90);
     drawField();
@@ -167,6 +170,7 @@ class Levels {
     }
   }
 
+  // draws the restart level and restart game buttons on each level screen
   void drawLevelButtons() {
     fill(0, 150, 255);
     rect(50, 520, 200, 50, 12);
@@ -180,6 +184,7 @@ class Levels {
     text("Restart Game", 650, 545);
   }
 
+// draws the soccer field with boundaries and center circle
   void drawField() {
     stroke(255);
     strokeWeight(4);
@@ -205,6 +210,7 @@ class Levels {
     text("GOAL", goalX + goalW / 2, goalY - 20);
   }
 
+  // checks if the ball has entered the goal in level 1 and updates score and resets ball
   void checkLevel1Goal() {
     boolean ballInGoal =
       level1Ball.x + level1Ball.radius > goalX &&
@@ -220,6 +226,7 @@ class Levels {
     }
   }
 
+  // checks if the ball has entered the goal in level 2 and updates score and resets ball
   void checkLevel2Goal() {
     boolean ballInGoal =
       level2Ball.x + level2Ball.radius > goalX &&
@@ -236,6 +243,7 @@ class Levels {
     }
   }
 
+  // checks if the ball has entered the goal in level 3 and updates score and resets ball
   void checkLevel3Goal() {
     boolean ballInGoal =
       level3Ball.x + level3Ball.radius > goalX &&
@@ -251,6 +259,7 @@ class Levels {
     }
   }
 
+  // checks if the ball goes out of bounds in level 1 and resets it if it does
   void checkOutOfBoundsLevel1() {
     float fieldLeft = 30;
     float fieldTop = 80;
@@ -286,6 +295,7 @@ class Levels {
     }
   }
 
+  // checks if the ball goes out of bounds in level 2 and resets it if it does
   void checkOutOfBoundsLevel2() {
     float fieldLeft = 30;
     float fieldTop = 80;
@@ -321,6 +331,7 @@ class Levels {
     }
   }
 
+  // checks if the ball goes out of bounds in level 3 and resets it if it does
   void checkOutOfBoundsLevel3() {
     float fieldLeft = 30;
     float fieldTop = 80;
@@ -356,54 +367,64 @@ class Levels {
     }
   }
 
+  // starts the drag action for level 1 if the mouse is over the ball
   void startLevel1Drag() {
     if (level1Ball.isMouseOverBall()) {
       level1Ball.startDrag();
     }
   }
 
+  // releases the drag action for level 1
   void releaseLevel1Drag() {
     level1Ball.release();
   }
 
+  // resets the level 1 ball and goal state
   void resetLevel1() {
     level1Ball.reset();
     level1GoalScored = false;
     goalMessageStartTime = 0;
   }
 
+  // starts the drag action for level 2 if the mouse is over the ball
   void startLevel2Drag() {
     if (level2Ball.isMouseOverBall()) {
       level2Ball.startDrag();
     }
   }
 
+  // releases the drag action for level 2
   void releaseLevel2Drag() {
     level2Ball.release();
   }
 
+  // resets the level 2 ball and goal state
   void resetLevel2() {
     level2Ball.reset();
     level2GoalScored = false;
     goalMessageStartTime = 0;
   }
 
+  // starts the drag action for level 3 if the mouse is over the ball
   void startLevel3Drag() {
     if (level3Ball.isMouseOverBall()) {
       level3Ball.startDrag();
     }
   }
 
+  // releases the drag action for level 3
   void releaseLevel3Drag() {
     level3Ball.release();
   }
 
+  // resets the level 3 ball and goal state
   void resetLevel3() {
     level3Ball.reset();
     level3GoalScored = false;
     goalMessageStartTime = 0;
   }
 
+  // draws the win screen after beating a level with options to go to next level or main menu
   void winScreen(int levelNumber) {
     background(70, 180, 90);
 
@@ -428,6 +449,7 @@ class Levels {
     text("Main Menu", 400, 465);
   }
 
+  // draws the championship screen after beating all 3 levels
   void champScreen() {
     background(70, 180, 90);
 
