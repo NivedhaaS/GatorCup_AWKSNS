@@ -1,6 +1,11 @@
+import processing.sound.*;
+
 Menu menu;
 Levels levels;
 Timer timer;
+
+SoundFile winSound;
+SoundFile missSound;
 
 int different_screens = 0;
 boolean show_menu = true;
@@ -19,6 +24,9 @@ void setup() {
   menu = new Menu();
   levels = new Levels();
   timer = new Timer(60);
+  
+  winSound = new SoundFile(this, "winPt.mp3");
+  missSound = new SoundFile(this, "missedPt.mp3");
 }
 
 // display different screens and game levels

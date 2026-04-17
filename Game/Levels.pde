@@ -266,6 +266,7 @@ class Levels {
       goals_scored++;
       level1GoalScored = true;
       goalMessageStartTime = millis();
+      winSound.play();
       level1Ball.reset();
     }
   }
@@ -283,6 +284,7 @@ class Levels {
       level2GoalScored = true;
       goalMessageStartTime = millis();
       level2Ball.reset();
+      winSound.play();
       goal_speed = random(2, 8);
     }
   }
@@ -299,6 +301,7 @@ class Levels {
       goals_scored++;
       level3GoalScored = true;
       goalMessageStartTime = millis();
+      winSound.play();
       level3Ball.reset();
     }
   }
@@ -328,11 +331,13 @@ class Levels {
       level1Ball.y < goalY + goalH;
 
     if (level1Ball.x - level1Ball.radius < fieldLeft) {
+      missSound.play();
       level1Ball.reset();
       return;
     }
 
     if (level1Ball.y - level1Ball.radius < fieldTop) {
+      missSound.play();
       level1Ball.reset();
       return;
     }
@@ -343,11 +348,13 @@ class Levels {
     }
 
     if (level1Ball.x + level1Ball.radius > fieldRight && !ballWithinGoalHeight) {
+      missSound.play();
       level1Ball.reset();
       return;
     }
 
     if (level1Ball.x - level1Ball.radius > goalX + goalW) {
+      missSound.play();
       level1Ball.reset();
     }
   }
