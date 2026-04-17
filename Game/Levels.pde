@@ -446,6 +446,8 @@ class Levels {
   // resets level 1
   void resetLevel1() {
     level1Ball.reset();
+    goalY = 220;
+    goal_moving = 1;
     level1GoalScored = false;
     goalMessageStartTime = 0;
   }
